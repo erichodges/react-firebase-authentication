@@ -6,12 +6,16 @@ import { PasswordForgetLink } from '../PasswordForget';
 import { auth } from '../../firebase';
 import * as routes from '../../constants/routes';
 
+import { Button, Input, Container, Header } from 'semantic-ui-react';
+
 const SignInPage = ({ history }) =>
   <div>
-    <h1>SignIn</h1>
-    <SignInForm history={history} />
-    <PasswordForgetLink />
-    <SignUpLink />
+      <Container>
+        <h1>Sign In</h1>
+        <SignInForm history={history} />
+        <PasswordForgetLink />
+        <SignUpLink />
+    </Container>
   </div>
 
 const updateByPropertyName = (propertyName, value) => () => ({
@@ -65,25 +69,28 @@ class SignInForm extends Component {
       email === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          value={email}
-          onChange={event => this.setState(updateByPropertyName('email', event.target.value))}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          value={password}
-          onChange={event => this.setState(updateByPropertyName('password', event.target.value))}
-          type="password"
-          placeholder="Password"
-        />
-        <button disabled={isInvalid} type="submit">
-          Sign In
-        </button>
+      <Container>
+        <form onSubmit={this.onSubmit}>
+          
+          <Input
+            value={email}
+            onChange={event => this.setState(updateByPropertyName('email', event.target.value))}
+            type="text"
+            placeholder="Email Address"
+          />
+          <Input
+            value={password}
+            onChange={event => this.setState(updateByPropertyName('password', event.target.value))}
+            type="password"
+            placeholder="Password"
+          />
+          <Button disabled={isInvalid} type="submit">
+            Sign In
+          </Button>
 
-        { error && <p>{error.message}</p> }
-      </form>
+          { error && <p>{error.message}</p> }
+        </form>
+      </Container>
     );
   }
 }
